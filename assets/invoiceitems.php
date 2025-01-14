@@ -36,7 +36,7 @@ namespace ProcessWire;
             <input type='number' class='uk-input' value=1>
           </td>
           <td class='total'>
-            <strong class='uk-input'></strong>
+            <strong class='uk-input uk-text-right uk-display-block'></strong>
           </td>
           <td class='delete'>
             <a class='delete-row' href>
@@ -63,6 +63,10 @@ namespace ProcessWire;
             <tr>
               <td><?= __('Subtotal (Excl. VAT)') ?></td>
               <td class='subtotal'></td>
+            </tr>
+            <tr class='vattotal' hidden>
+              <td><span class='rate'></span> <?= __('VAT') ?></td>
+              <td class='value'></td>
             </tr>
             <tr class='uk-text-bold'>
               <td><?= __('Total (Incl. VAT)') ?></td>

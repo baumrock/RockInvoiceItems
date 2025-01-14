@@ -48,9 +48,35 @@ var RockInvoiceItems;
       // grandtotal
       return {
         subtotal: this.subtotal(),
-        vat: 0,
+        vat: this.getVatArray(),
         grandtotal: this.grandtotal(),
       };
+    }
+
+    /**
+     * Returns an array of VAT rates plus their totals
+     * eg
+     * [
+     *   [7.5, 123],
+     *   [10, 1230],
+     *   [20, 12300]
+     * ]
+     */
+    getVatArray() {
+      let vatArray = {};
+      this.items().forEach((tr) => {
+        const row = tr._row;
+        const key = row.vat();
+        if (!key) return;
+        // if the item already exists add row.total() to it
+        // otherwise create a new key and add row.total() to it
+        const vatValue = (row.total() * row.vat()) / 100;
+        if (vatArray[key]) vatArray[key] += vatValue;
+        else vatArray[key] = vatValue;
+        vatArray[key] = vatArray[key].toFixed(2);
+        if (vatArray[key] === "0.00") delete vatArray[key];
+      });
+      return vatArray;
     }
 
     grandtotal() {
@@ -66,14 +92,16 @@ var RockInvoiceItems;
     }
 
     itemsJSON() {
-      return Array.from(this.items()).map((tr) => {
-        return {
-          text: "TBD",
-          net: tr.querySelector(".net input").value,
-          vat: tr.querySelector(".vat input").value,
-          quantity: tr.querySelector(".quantity input").value,
-        };
-      });
+      return JSON.stringify(
+        Array.from(this.items()).map((tr) => {
+          return {
+            text: "TBD",
+            net: tr.querySelector(".net input").value,
+            vat: tr.querySelector(".vat input").value,
+            quantity: tr.querySelector(".quantity input").value,
+          };
+        })
+      );
     }
 
     makeSortable() {
@@ -92,15 +120,7 @@ var RockInvoiceItems;
         this.textarea.value = "";
         return;
       }
-      this.textarea.value = JSON.stringify(
-        {
-          items: this.itemsJSON(),
-          totals: JSON.stringify(this.getTotals()),
-        },
-        null,
-        // spaces for indentation (debugging)
-        0
-      );
+      this.textarea.value = this.itemsJSON();
     }
 
     subtotal() {
@@ -117,15 +137,44 @@ var RockInvoiceItems;
         this.labels.removeAttribute("hidden");
         // update totals
         let totals = this.getTotals();
+
+        // update subtotal
         this.totalstable.querySelector(".subtotal").textContent =
           totals.subtotal.toFixed(2);
+
+        // update grandtotal
         this.totalstable.querySelector(".grandtotal").textContent =
           totals.grandtotal.toFixed(2);
+
+        this.updateVatTotals();
       } else {
         this.totalstable.setAttribute("hidden", "");
         this.labels.setAttribute("hidden", "");
       }
       this.sleep();
+    }
+
+    updateVatTotals() {
+      let vatArray = this.getVatArray();
+      // remove all non-hidden vattotal rows
+      this.totalstable
+        .querySelectorAll("tr.vattotal:not([hidden])")
+        .forEach((tr) => tr.remove());
+
+      // use the hidden tr.vattotal as template
+      const tpl = this.totalstable.querySelector("tr.vattotal[hidden]");
+
+      // add new vattotal rows
+      for (const [key, value] of Object.entries(vatArray)) {
+        const clone = tpl.cloneNode(true);
+        // write vatrate to .rate and value to .value
+        clone.querySelector(".rate").textContent = key + "%";
+        clone.querySelector(".value").textContent = value;
+        clone.removeAttribute("hidden");
+        // insert the node right before the last tr of the table
+        const last = this.totalstable.querySelector("tbody tr:last-child");
+        this.totalstable.querySelector("tbody").insertBefore(clone, last);
+      }
     }
   }
 
