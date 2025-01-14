@@ -5,7 +5,7 @@ namespace ProcessWire;
 ?>
 <div class='uk-overflow-auto'>
   <table class='uk-table uk-table-small uk-table-striped rockinvoice-items-table uk-margin-remove'>
-    <thead>
+    <thead class='labels' hidden>
       <tr>
         <th></th>
         <th class='uk-width-expand'><?= __('Item') ?></th>
@@ -17,11 +17,11 @@ namespace ProcessWire;
       </tr>
     </thead>
     <tbody>
-      <?php for ($i = 0; $i < 10; $i++): ?>
+      <template>
         <tr>
           <td><span class="sort-handle" uk-icon="icon: table"></span></td>
           <td class='uk-width-expand text'>
-            Sed magna purus fermentum euSed magna
+            TBD
           </td>
           <td class='net'>
             <input type='number' class='uk-input'>
@@ -36,7 +36,7 @@ namespace ProcessWire;
             <input type='number' class='uk-input'>
           </td>
           <td class='total'>
-            <strong class='uk-input'>€ 1.000.000,00</strong>
+            <strong class='uk-input'>TBD</strong>
           </td>
           <td class='delete'>
             <a href>
@@ -44,18 +44,22 @@ namespace ProcessWire;
             </a>
           </td>
         </tr>
-      <?php endfor; ?>
+      </template>
     </tbody>
     <tfoot>
       <tr>
+
+        <!-- new item button -->
         <td colspan='2' class='uk-text-nowrap'>
-          <a href class='uk-button uk-button-default uk-button-small'>
+          <a href class='add-item uk-button uk-button-default uk-button-small'>
             <i class='fa fa-plus' aria-hidden='true'></i>
             <?= __('Add item') ?>
           </a>
         </td>
+
+        <!-- totals table -->
         <td colspan='4' class='uk-width-expand uk-text-right'>
-          <table class='uk-inline totals uk-margin-remove'>
+          <table class='uk-inline totals uk-margin-remove' hidden>
             <tr>
               <td><?= __('Subtotal (Excl. VAT)') ?></td>
               <td>XXX</td>
@@ -78,16 +82,7 @@ namespace ProcessWire;
       </tr>
     </tfoot>
   </table>
-  <script>
-    (() => {
-      const wrapper = document.currentScript.parentNode;
-      $(document).ready(function() {
-        const tbody = wrapper.querySelector('tbody');
-        $(tbody).sortable({
-          handle: '.sort-handle',
-          cursor: 'grabbing',
-        });
-      });
-    })()
-  </script>
 </div>
+<script>
+  RockInvoiceItems.init();
+</script>
