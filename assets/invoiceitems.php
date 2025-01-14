@@ -48,13 +48,13 @@ namespace ProcessWire;
     </tbody>
     <tfoot>
       <tr>
-        <td class='uk-text-nowrap'>
+        <td colspan='2' class='uk-text-nowrap'>
           <a href class='uk-button uk-button-default uk-button-small'>
             <i class='fa fa-plus' aria-hidden='true'></i>
             <?= __('Add item') ?>
           </a>
         </td>
-        <td colspan='5' class='uk-width-expand uk-text-right'>
+        <td colspan='4' class='uk-width-expand uk-text-right'>
           <table class='uk-inline totals uk-margin-remove'>
             <tr>
               <td><?= __('Subtotal (Excl. VAT)') ?></td>
