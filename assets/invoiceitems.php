@@ -65,7 +65,7 @@ namespace ProcessWire;
       <tr>
 
         <!-- new row button -->
-        <td colspan='2' class='uk-text-nowrap'>
+        <td colspan='2' class='uk-text-nowrap uk-padding-remove-left'>
           <a href class='add-row uk-button uk-button-default uk-button-small'>
             <i class='fa fa-plus' aria-hidden='true'></i>
             <?= __('Add item') ?>
