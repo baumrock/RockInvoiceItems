@@ -73,9 +73,14 @@ var RockInvoiceItems;
         const vatValue = (row.total() * row.vat()) / 100;
         if (vatArray[key]) vatArray[key] += vatValue;
         else vatArray[key] = vatValue;
-        vatArray[key] = vatArray[key].toFixed(2);
+      });
+
+      // Format numbers after all calculations are done
+      Object.keys(vatArray).forEach((key) => {
+        vatArray[key] = Number(vatArray[key]).toFixed(2);
         if (vatArray[key] === "0.00") delete vatArray[key];
       });
+
       return vatArray;
     }
 
@@ -183,6 +188,7 @@ var RockInvoiceItems;
       this.field = field;
       this.tr = field.li.querySelector("tbody tr:last-child");
       this.deleteButton = this.tr.querySelector(".delete-row");
+      this.cloneButton = this.tr.querySelector(".clone-row");
       this.rowTotal = this.tr.querySelector(".total > strong");
 
       // store reference to this instance on the row dom element
@@ -193,10 +199,24 @@ var RockInvoiceItems;
         e.preventDefault();
         this.deleteRow(this.deleteButton);
       });
+      this.cloneButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.clone();
+      });
       this.selectOnClick();
       this.monitorInputs();
 
       // trigger first update
+      this.update();
+    }
+
+    clone() {
+      // Clone the current row
+      const clone = this.tr.cloneNode(true);
+      // Insert after current row
+      this.tr.after(clone);
+      // Create new Row instance for the cloned row
+      new Row(this.field);
       this.update();
     }
 

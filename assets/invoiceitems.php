@@ -19,7 +19,22 @@ namespace ProcessWire;
     <tbody class='items'>
       <template>
         <tr>
-          <td><span class="sort-handle" uk-icon="icon: table"></span></td>
+          <td class='uk-text-nowrap icons'>
+            <a
+              href
+              class="sort-handle"
+              title='<?= __('Move row') ?>'
+              uk-tooltip>
+              <i class='fa fa-bars' aria-hidden='true'></i>
+            </a>
+            <a
+              href
+              class='clone-row'
+              title='<?= __('Clone row') ?>'
+              uk-tooltip>
+              <i class='fa fa-clone' aria-hidden='true'></i>
+            </a>
+          </td>
           <td class='uk-width-expand text'>
             TBD
           </td>

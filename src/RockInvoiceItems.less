@@ -7,8 +7,23 @@
   .rockinvoice-items-table {
     // dragged row
     .ui-sortable-helper {
-      background-color: #ffffff;
-      opacity: 0.7;
+      background-color: rgba(0, 0, 0, 0.1);
+      // hide all columns while dragging to avoid display issues
+      td {
+        display: none;
+      }
+    }
+
+    // icons
+    .sort-handle {
+      width: 20px;
+      cursor: move;
+    }
+    .icons {
+      display: inline-flex;
+      gap: 15px;
+      align-items: center;
+      transform: translateY(7px);
     }
 
     // body cell padding
@@ -19,12 +34,6 @@
     // text column minimum witdth
     tbody .text {
       min-width: 400px;
-    }
-
-    // icon size
-    .sort-handle {
-      width: 20px;
-      cursor: move;
     }
 
     // align all input fields right
@@ -61,7 +70,7 @@
     .delete {
       a {
         display: inline-block;
-        transform: translateY(5px);
+        transform: translateY(7px);
       }
     }
 
