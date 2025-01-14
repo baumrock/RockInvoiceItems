@@ -39,7 +39,7 @@ namespace ProcessWire;
             <strong class='uk-input'>TBD</strong>
           </td>
           <td class='delete'>
-            <a href>
+            <a class='delete-row' href>
               <i class='fa fa-trash-o' aria-hidden='true'></i>
             </a>
           </td>
@@ -49,9 +49,9 @@ namespace ProcessWire;
     <tfoot>
       <tr>
 
-        <!-- new item button -->
+        <!-- new row button -->
         <td colspan='2' class='uk-text-nowrap'>
-          <a href class='add-item uk-button uk-button-default uk-button-small'>
+          <a href class='add-row uk-button uk-button-default uk-button-small'>
             <i class='fa fa-plus' aria-hidden='true'></i>
             <?= __('Add item') ?>
           </a>
