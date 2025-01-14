@@ -1,0 +1,86 @@
+.InputfieldRockInvoiceItems {
+  // hide textarea
+  textarea {
+    display: none;
+  }
+
+  .rockinvoice-items-table {
+    // dragged row
+    .ui-sortable-helper {
+      background-color: #ffffff;
+      opacity: 0.7;
+    }
+
+    // body cell padding
+    tbody td {
+      padding: 5px 10px;
+    }
+
+    // text column minimum witdth
+    tbody .text {
+      min-width: 400px;
+    }
+
+    // icon size
+    .sort-handle {
+      width: 20px;
+      cursor: move;
+    }
+
+    // align all input fields right
+    input {
+      text-align: right;
+    }
+
+    // net column
+    .net input {
+      width: 120px;
+    }
+    // vat column
+    .vat {
+      .uk-flex {
+        gap: 5px;
+      }
+      input {
+        width: 80px;
+      }
+    }
+    // quantity column
+    .quantity input {
+      width: 80px;
+    }
+    // total column
+    .total {
+      text-wrap: nowrap;
+      strong {
+        border: 0;
+        background: none;
+      }
+    }
+    // delete column
+    .delete {
+      a {
+        display: inline-block;
+        transform: translateY(5px);
+      }
+    }
+
+    // footer
+    > tfoot td {
+      padding-bottom: 0;
+    }
+  }
+
+  // totals
+  table.totals {
+    td {
+      padding: 2px 0px;
+      &:first-child {
+        padding-right: 15px;
+      }
+    }
+    tr {
+      background: none;
+    }
+  }
+}
