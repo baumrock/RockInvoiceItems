@@ -16,7 +16,7 @@ namespace ProcessWire;
         <th></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class='items'>
       <template>
         <tr>
           <td><span class="sort-handle" uk-icon="icon: table"></span></td>
@@ -24,19 +24,19 @@ namespace ProcessWire;
             TBD
           </td>
           <td class='net'>
-            <input type='number' class='uk-input'>
+            <input type='number' class='uk-input' value=0>
           </td>
           <td class='vat'>
             <div class='uk-flex uk-flex-middle'>
-              <input type='number' class='uk-input'>
+              <input type='number' class='uk-input' value=0>
               <span>%</span>
             </div>
           </td>
           <td class='quantity'>
-            <input type='number' class='uk-input'>
+            <input type='number' class='uk-input' value=1>
           </td>
           <td class='total'>
-            <strong class='uk-input'>TBD</strong>
+            <strong class='uk-input'></strong>
           </td>
           <td class='delete'>
             <a class='delete-row' href>
@@ -62,19 +62,11 @@ namespace ProcessWire;
           <table class='uk-inline totals uk-margin-remove' hidden>
             <tr>
               <td><?= __('Subtotal (Excl. VAT)') ?></td>
-              <td>XXX</td>
+              <td class='subtotal'></td>
             </tr>
-            <tr>
-              <td>10% <?= __('VAT') ?></td>
-              <td>XXX</td>
-            </tr>
-            <tr>
-              <td>20% <?= __('VAT') ?></td>
-              <td>XXX</td>
-            </tr>
-            <tr class='uk-text-bold grandtotal'>
+            <tr class='uk-text-bold'>
               <td><?= __('Total (Incl. VAT)') ?></td>
-              <td>XXX</td>
+              <td class='grandtotal'></td>
             </tr>
           </table>
         </td>
