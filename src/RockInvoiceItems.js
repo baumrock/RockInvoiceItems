@@ -177,8 +177,7 @@ var RockInvoiceItems;
         clone.querySelector(".value").textContent = value;
         clone.removeAttribute("hidden");
         // insert the node right before the last tr of the table
-        const last = this.totalstable.querySelector("tbody tr:last-child");
-        this.totalstable.querySelector("tbody").insertBefore(clone, last);
+        this.totalstable.querySelector("tbody tr:last-child").before(clone);
       }
     }
   }
