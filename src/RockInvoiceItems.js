@@ -1,6 +1,5 @@
-var RockInvoiceItems;
-(() => {
-  class _RockInvoiceItems {
+const RockInvoiceItems = (() => {
+  class RockInvoiceItems {
     init() {
       new Field();
     }
@@ -269,5 +268,5 @@ var RockInvoiceItems;
     }
   }
 
-  RockInvoiceItems = new _RockInvoiceItems();
+  return new RockInvoiceItems();
 })();
