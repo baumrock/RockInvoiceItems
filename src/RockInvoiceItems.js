@@ -183,9 +183,9 @@ var RockInvoiceItems;
   }
 
   class Row {
-    constructor(field) {
+    constructor(field, addedRow) {
       this.field = field;
-      this.tr = field.li.querySelector("tbody tr:last-child");
+      this.tr = addedRow || field.li.querySelector("tbody tr:last-child");
       this.deleteButton = this.tr.querySelector(".delete-row");
       this.cloneButton = this.tr.querySelector(".clone-row");
       this.rowTotal = this.tr.querySelector(".total > strong");
@@ -214,8 +214,8 @@ var RockInvoiceItems;
       const clone = this.tr.cloneNode(true);
       // Insert after current row
       this.tr.after(clone);
-      // Create new Row instance for the cloned row
-      new Row(this.field);
+      const addedRow = this.tr.nextElementSibling;
+      new Row(this.field, addedRow);
       this.update();
     }
 
