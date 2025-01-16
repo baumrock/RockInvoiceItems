@@ -18,7 +18,7 @@ class FieldtypeRockInvoiceItems extends FieldtypeTextarea
   {
     if (!$value instanceof Items) return;
     return wire()->files->render(__DIR__ . '/assets/invoiceitems-pdf.php', [
-      'value' => $value
+      'items' => $value
     ]);
   }
 

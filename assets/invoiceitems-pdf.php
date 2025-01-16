@@ -11,7 +11,7 @@ namespace ProcessWire;
 $pos = 1;
 ?>
 <div class='mt3'></div>
-<table class='w-full f10 mb5'>
+<table class='w-full f10'>
   <thead>
     <tr class='bg-muted'>
       <th class='pos p1 w1 text-center'>#</th>
@@ -23,7 +23,7 @@ $pos = 1;
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($value as $item): ?>
+    <?php foreach ($items as $item): ?>
       <tr>
         <td class='border-top pos p1 text-center'><?= $pos++ ?></td>
         <td class='border-top text p1'><?= $item->text ?></td>
@@ -35,3 +35,50 @@ $pos = 1;
     <?php endforeach ?>
   </tbody>
 </table>
+<table class='w-full'>
+  <tr>
+    <td class='text-right pr5 v-bottom'>
+      <table>
+        <tr>
+          <td class='bg-muted p3'>
+            <table>
+              <tr>
+                <td>
+                  Zahlungsmethode: <strong>SEPA-Lastschrift</strong>
+                </td>
+              </tr>
+            </table>
+            <table>
+              <tr>
+                <td class='f10 pt2'>
+                  Bitte nicht überweisen - Betrag wird automatisch abgebucht.
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td class='w1'>
+      <table class='f10'>
+        <tr>
+          <td class='nowrap p1 text-right w1'><?= __('Subtotal (excl. VAT)') ?>:</td>
+          <td class='nowrap p1 pl3 text-right'><?= $items->subtotal() ?></td>
+        </tr>
+        <tr>
+          <td class='nowrap px1 text-right w1'>TBD% <?= __('VAT') ?>:</td>
+          <td class='nowrap px1 pl3 text-right'>TBD</td>
+        </tr>
+        <tr>
+          <td class='nowrap px1 text-right w1'>TBD% <?= __('VAT') ?>:</td>
+          <td class='nowrap px1 pl3 text-right'>TBD</td>
+        </tr>
+        <tr>
+          <td class='nowrap p1 text-right w1 text-bold f12'><?= __('Total (incl. VAT)') ?>:</td>
+          <td class='nowrap p1 pl3 text-right text-bold f12'><?= $items->grandtotal() ?></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<div class='mt10'></div>
