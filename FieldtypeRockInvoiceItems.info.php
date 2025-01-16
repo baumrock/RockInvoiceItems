@@ -7,6 +7,9 @@ $info = [
   'version' => json_decode(file_get_contents(__DIR__ . "/package.json"))->version,
   'summary' => 'Invoice items Fieldtype',
   'icon' => 'list-ol',
+  'requires' => [
+    'RockMoney',
+  ],
   'installs' => [
     'InputfieldRockInvoiceItems',
   ],

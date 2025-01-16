@@ -37,14 +37,4 @@ class InputfieldRockInvoiceItems extends InputfieldTextarea
     $this->addAsset('dst/RockInvoiceItems.min.js');
     $this->addAsset('dst/RockInvoiceItems.min.css');
   }
-
-  /**
-   * Process the Inputfield's input
-   * @return $this
-   */
-  public function ___processInput($input)
-  {
-    $this->message('process input!');
-    return false;
-  }
 }

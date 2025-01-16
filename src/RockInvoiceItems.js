@@ -244,13 +244,15 @@ const RockInvoiceItems = (() => {
       });
     }
 
+    /**
+     * Get array ready to be used for storing in the textarea
+     */
     toArray() {
       return {
         text: "TBD",
         net: this.net(),
         vat: this.vat(),
         quantity: this.quantity(),
-        total: this.total(),
       };
     }
 
