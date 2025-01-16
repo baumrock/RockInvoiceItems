@@ -43,29 +43,6 @@ class Items extends WireArray
     return $total;
   }
 
-  /**
-   * Get an array of VAT rates and their totals
-   * @return array Array of VAT rates and their totals, e.g. ['7.5' => 123, '10' => 1230]
-   */
-  public function getVatArray(): array
-  {
-    $vatArray = [];
-    foreach ($this->data as $item) {
-      $vatRate = $item->vat();
-      if (!$vatRate) continue;
-      $vatValue = ($item->total() * $vatRate) / 100;
-      $vatArray[(string)$vatRate] = ($vatArray[(string)$vatRate] ?? 0) + $vatValue;
-    }
-
-    // Format numbers and remove zero values
-    foreach ($vatArray as $key => $value) {
-      $vatArray[$key] = number_format($value, 2, '.', '');
-      if ($vatArray[$key] === "0.00") unset($vatArray[$key]);
-    }
-
-    return $vatArray;
-  }
-
   private function importItems($items = null): void
   {
     if (!is_array($items)) return;
@@ -102,5 +79,25 @@ class Items extends WireArray
       $arr['items'][] = $item->getJsonArray();
     }
     return json_encode($arr);
+  }
+
+  /**
+   * Get an array of VAT rates and their totals
+   * @return array Array of VAT rates and their totals, e.g. ['7.5' => 123, '10' => 1230]
+   */
+  public function vatArray(): array
+  {
+    $vatArray = [];
+    foreach ($this->data as $item) {
+      /** @var Item $item */
+      if (!$item->vat) continue;
+      $key = (string)$item->vat;
+      if (!isset($vatArray[$key])) {
+        $vatArray[$key] = rockmoney(0);
+      }
+      $vatArray[$key] = $vatArray[$key]->plus($item->totalNet->times($item->vatRate()));
+    }
+    ksort($vatArray);
+    return $vatArray;
   }
 }

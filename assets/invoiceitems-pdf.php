@@ -37,7 +37,7 @@ $pos = 1;
 </table>
 <table class='w-full'>
   <tr>
-    <td class='text-right pr5 v-bottom'>
+    <td class='text-right pr5'>
       <table>
         <tr>
           <td class='bg-muted p3'>
@@ -51,7 +51,7 @@ $pos = 1;
             <table>
               <tr>
                 <td class='f10 pt2'>
-                  Bitte nicht überweisen - Betrag wird automatisch abgebucht.
+                  Bitte nicht überweisen - wird automatisch abgebucht.
                 </td>
               </tr>
             </table>
@@ -65,14 +65,12 @@ $pos = 1;
           <td class='nowrap p1 text-right w1'><?= __('Subtotal (excl. VAT)') ?>:</td>
           <td class='nowrap p1 pl3 text-right'><?= $items->subtotal() ?></td>
         </tr>
-        <tr>
-          <td class='nowrap px1 text-right w1'>TBD% <?= __('VAT') ?>:</td>
-          <td class='nowrap px1 pl3 text-right'>TBD</td>
-        </tr>
-        <tr>
-          <td class='nowrap px1 text-right w1'>TBD% <?= __('VAT') ?>:</td>
-          <td class='nowrap px1 pl3 text-right'>TBD</td>
-        </tr>
+        <?php foreach ($items->vatArray() as $rate => $total): ?>
+          <tr>
+            <td class='nowrap px1 text-right w1'><?= $rate ?>% <?= __('VAT') ?>:</td>
+            <td class='nowrap px1 pl3 text-right'><?= $total ?></td>
+          </tr>
+        <?php endforeach ?>
         <tr>
           <td class='nowrap p1 text-right w1 text-bold f12'><?= __('Total (incl. VAT)') ?>:</td>
           <td class='nowrap p1 pl3 text-right text-bold f12'><?= $items->grandtotal() ?></td>
