@@ -21,6 +21,9 @@ const RockInvoiceItems = (() => {
       // make row items sortable
       this.makeSortable();
 
+      // populate from textarea data
+      this.wakeup();
+
       // event listeners
       this.addRowButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -34,7 +37,7 @@ const RockInvoiceItems = (() => {
       this.li.querySelector("tbody").appendChild(clone);
 
       // create new row
-      new Row(this);
+      new Item(this);
 
       // update totals
       this.update();
@@ -62,16 +65,12 @@ const RockInvoiceItems = (() => {
      * ]
      */
     getVatArray() {
-      let vatArray = {};
-      this.items().forEach((tr) => {
-        const row = tr._row;
-        const key = row.vat();
-        if (!key) return;
-        // if the item already exists add row.total() to it
-        // otherwise create a new key and add row.total() to it
-        const vatValue = (row.total() * row.vat()) / 100;
-        if (vatArray[key]) vatArray[key] += vatValue;
-        else vatArray[key] = vatValue;
+      const vatArray = {};
+      this.items().forEach((item) => {
+        const vatRate = item.vat();
+        if (!vatRate) return;
+        const vatValue = (item.total() * vatRate) / 100;
+        vatArray[vatRate] = (vatArray[vatRate] || 0) + vatValue;
       });
 
       // Format numbers after all calculations are done
@@ -84,28 +83,18 @@ const RockInvoiceItems = (() => {
     }
 
     grandtotal() {
-      let total = 0;
-      this.items().forEach((tr) => {
-        total += tr._row.total(true);
-      });
-      return total;
+      return this.items().reduce((total, item) => total + item.total(true), 0);
     }
 
     items() {
-      return this.itemstable.querySelectorAll("tbody.items > tr");
+      const rows = this.itemstable.querySelectorAll("tbody.items > tr");
+      return Array.from(rows)
+        .map((tr) => tr._item)
+        .filter((item) => item);
     }
 
-    itemsJSON() {
-      return JSON.stringify(
-        Array.from(this.items()).map((tr) => {
-          return {
-            text: "TBD",
-            net: tr.querySelector(".net input").value,
-            vat: tr.querySelector(".vat input").value,
-            quantity: tr.querySelector(".quantity input").value,
-          };
-        })
-      );
+    itemsArray() {
+      return this.items().map((item) => item.toArray());
     }
 
     makeSortable() {
@@ -124,15 +113,16 @@ const RockInvoiceItems = (() => {
         this.textarea.value = "";
         return;
       }
-      this.textarea.value = this.itemsJSON();
+      this.textarea.value = JSON.stringify({
+        items: this.itemsArray(),
+      });
     }
 
     subtotal() {
-      let subtotal = 0;
-      this.items().forEach((tr) => {
-        subtotal += tr._row.total();
-      });
-      return subtotal;
+      return this.items().reduce(
+        (subtotal, item) => subtotal + item.total(),
+        0
+      );
     }
 
     update() {
@@ -179,23 +169,25 @@ const RockInvoiceItems = (() => {
         this.totalstable.querySelector("tbody tr:last-child").before(clone);
       }
     }
+
+    wakeup() {}
   }
 
-  class Row {
-    constructor(field, addedRow) {
+  class Item {
+    constructor(field, addedItem) {
       this.field = field;
-      this.tr = addedRow || field.li.querySelector("tbody tr:last-child");
+      this.tr = addedItem || field.li.querySelector("tbody tr:last-child");
       this.deleteButton = this.tr.querySelector(".delete-row");
       this.cloneButton = this.tr.querySelector(".clone-row");
-      this.rowTotal = this.tr.querySelector(".total > strong");
+      this.itemTotal = this.tr.querySelector(".total > strong");
 
       // store reference to this instance on the row dom element
-      this.tr._row = this;
+      this.tr._item = this;
 
       // event listeners
       this.deleteButton.addEventListener("click", (e) => {
         e.preventDefault();
-        this.deleteRow(this.deleteButton);
+        this.deleteItem(this.deleteButton);
       });
       this.cloneButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -213,12 +205,12 @@ const RockInvoiceItems = (() => {
       const clone = this.tr.cloneNode(true);
       // Insert after current row
       this.tr.after(clone);
-      const addedRow = this.tr.nextElementSibling;
-      new Row(this.field, addedRow);
+      const addedItem = this.tr.nextElementSibling;
+      new Item(this.field, addedItem);
       this.update();
     }
 
-    deleteRow(button) {
+    deleteItem(button) {
       button.closest("tr").remove();
       this.update();
     }
@@ -252,6 +244,16 @@ const RockInvoiceItems = (() => {
       });
     }
 
+    toArray() {
+      return {
+        text: "TBD",
+        net: this.net(),
+        vat: this.vat(),
+        quantity: this.quantity(),
+        total: this.total(),
+      };
+    }
+
     total(withVAT = false) {
       const total = this.net() * this.quantity();
       if (!withVAT) return total;
@@ -259,7 +261,7 @@ const RockInvoiceItems = (() => {
     }
 
     update() {
-      this.rowTotal.textContent = this.total().toFixed(2);
+      this.itemTotal.textContent = this.total().toFixed(2);
       this.field.update();
     }
 
