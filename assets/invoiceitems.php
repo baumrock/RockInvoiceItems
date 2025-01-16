@@ -39,16 +39,16 @@ namespace ProcessWire;
             TBD
           </td>
           <td class='net'>
-            <input type='number' class='uk-input' value=0>
+            <input type='number' class='uk-input' step='0.01' value=0>
           </td>
           <td class='vat'>
             <div class='uk-flex uk-flex-middle'>
-              <input type='number' class='uk-input' value=0>
+              <input type='number' class='uk-input' step='0.01' value=0>
               <span>%</span>
             </div>
           </td>
           <td class='quantity'>
-            <input type='number' class='uk-input' value=1>
+            <input type='number' class='uk-input' step='0.01' value=1>
           </td>
           <td class='total'>
             <strong class='uk-input uk-text-right uk-display-block'></strong>
