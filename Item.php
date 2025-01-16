@@ -18,6 +18,7 @@ class Item extends WireData
   public float $vat;
   public float $quantity;
   public Money $totalNet;
+  public Money $totalVat;
   public Money $totalGross;
 
   public function __construct(array $data = [])
@@ -37,6 +38,7 @@ class Item extends WireData
       'vat' => $this->vat,
       'quantity' => $this->quantity,
       'totalNet' => $this->totalNet,
+      'totalVat' => $this->totalVat,
       'totalGross' => $this->totalGross,
     ];
   }
@@ -77,6 +79,7 @@ class Item extends WireData
   public function setTotals(): void
   {
     $this->totalNet = $this->net->times($this->quantity);
+    $this->totalVat = $this->net->times($this->quantity)->times($this->vatRate());
     $this->totalGross = $this->net->times($this->quantity)->times(1 + $this->vatRate());
   }
 

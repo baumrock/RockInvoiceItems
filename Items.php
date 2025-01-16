@@ -100,4 +100,13 @@ class Items extends WireArray
     ksort($vatArray);
     return $vatArray;
   }
+
+  public function vattotal(): Money
+  {
+    $total = rockmoney(0);
+    foreach ($this as $item) {
+      $total = $total->plus($item->totalVat);
+    }
+    return $total;
+  }
 }

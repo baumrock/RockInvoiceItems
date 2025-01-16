@@ -2,6 +2,8 @@
 
 namespace ProcessWire;
 
+if (!$items->count()) return;
+
 /**
  * This markup is used in RockInvoice for rendering invoice items in
  * a PDF invoice.You can use it without the RockInvoice module by using
@@ -9,6 +11,7 @@ namespace ProcessWire;
  */
 
 $pos = 1;
+
 ?>
 <div class='mt3'></div>
 <table class='w-full f10'>
@@ -37,8 +40,8 @@ $pos = 1;
 </table>
 <table class='w-full'>
   <tr>
-    <td class='text-right pr5'>
-      <table>
+    <td class='text-right pr3 v-bottom'>
+      <!-- <table>
         <tr>
           <td class='bg-muted p3'>
             <table>
@@ -48,18 +51,11 @@ $pos = 1;
                 </td>
               </tr>
             </table>
-            <table>
-              <tr>
-                <td class='f10 pt2'>
-                  Bitte nicht überweisen - wird automatisch abgebucht.
-                </td>
-              </tr>
-            </table>
           </td>
         </tr>
-      </table>
+      </table> -->
     </td>
-    <td class='w1'>
+    <td class='w1 pl3 border-top'>
       <table class='f10'>
         <tr>
           <td class='nowrap p1 text-right w1'><?= __('Subtotal (excl. VAT)') ?>:</td>
