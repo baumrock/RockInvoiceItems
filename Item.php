@@ -15,7 +15,7 @@ class Item extends WireData
 {
   public string $text;
   public Money $net;
-  public Money $vat;
+  public float $vat;
   public float $quantity;
   public Money $totalNet;
   public Money $totalGross;
@@ -24,7 +24,7 @@ class Item extends WireData
   {
     $this->text = '';
     $this->net = rockmoney()->parse(0);
-    $this->vat = rockmoney()->parse(0);
+    $this->vat = 0;
     $this->quantity = 0;
     $this->importArray($data);
   }
@@ -55,8 +55,8 @@ class Item extends WireData
     return [
       'text' => (string)$this->text,
       'net' => $this->net->getFloat(),
-      'vat' => $this->vat->getFloat(),
-      'quantity' => (float)$this->quantity,
+      'vat' => $this->float($this->vat),
+      'quantity' => $this->float($this->quantity),
     ];
   }
 
@@ -68,7 +68,7 @@ class Item extends WireData
     foreach ($data as $key => $value) {
       if ($key === 'text') $this->text = wire()->sanitizer->purify($value);
       if ($key === 'net') $this->net = rockmoney($value);
-      if ($key === 'vat') $this->vat = rockmoney($value);
+      if ($key === 'vat') $this->vat = $this->float($value);
       if ($key === 'quantity') $this->quantity = $this->float($value);
     }
     $this->setTotals();
@@ -92,6 +92,6 @@ class Item extends WireData
 
   public function vatRate(): float
   {
-    return $this->vat->getFloat() / 100;
+    return $this->vat / 100;
   }
 }

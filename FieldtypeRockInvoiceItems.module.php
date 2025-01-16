@@ -16,7 +16,10 @@ class FieldtypeRockInvoiceItems extends FieldtypeTextarea
 
   public function formatValue($page, $field, $value)
   {
-    return '<table><tr><td>TBD</td></tr></table>';
+    if (!$value instanceof Items) return;
+    return wire()->files->render(__DIR__ . '/assets/invoiceitems-pdf.php', [
+      'value' => $value
+    ]);
   }
 
   public function getBlankValue(Page $page, Field $field)

@@ -37,10 +37,9 @@ const RockInvoiceItems = (() => {
       this.li.querySelector("tbody").appendChild(clone);
 
       // create new row
-      new Item(this);
+      const item = new Item(this);
 
-      // update totals
-      this.update();
+      return item;
     }
 
     getTotals() {
@@ -170,7 +169,14 @@ const RockInvoiceItems = (() => {
       }
     }
 
-    wakeup() {}
+    wakeup() {
+      const data = JSON.parse(this.textarea.value);
+      if (data.items) {
+        data.items.forEach((item) => {
+          this.addRow().setData(item.net, item.vat, item.quantity);
+        });
+      }
+    }
   }
 
   class Item {
@@ -242,6 +248,13 @@ const RockInvoiceItems = (() => {
           input.select();
         });
       });
+    }
+
+    setData(net, vat, quantity) {
+      this.tr.querySelector(".net input").value = net;
+      this.tr.querySelector(".vat input").value = vat;
+      this.tr.querySelector(".quantity input").value = quantity;
+      this.update();
     }
 
     /**
