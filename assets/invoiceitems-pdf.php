@@ -2,6 +2,12 @@
 
 namespace ProcessWire;
 
+/**
+ * This markup is used in RockInvoice for rendering invoice items in
+ * a PDF invoice.You can use it without the RockInvoice module by using
+ * RockFrontend's domtools to modify the markup to your needs.
+ */
+
 $pos = 1;
 ?>
 <div class='mt3'></div>
