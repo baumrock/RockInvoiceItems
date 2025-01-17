@@ -1,7 +1,7 @@
 .InputfieldRockInvoiceItems {
   // hide textarea
   .InputfieldContent > textarea {
-    // display: none;
+    display: none;
   }
 
   .rockinvoice-items-table {
@@ -34,6 +34,15 @@
     // text column minimum witdth
     tbody .text {
       min-width: 400px;
+      textarea {
+        display: none;
+      }
+    }
+    .inline-editor {
+      transform: translateY(1px);
+      > * {
+        margin: 0;
+      }
     }
 
     // align all input fields right

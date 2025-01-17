@@ -21,7 +21,7 @@ namespace ProcessWire;
     </thead>
     <tbody class='items'>
       <template>
-        <tr>
+        <tr class='uk-animation-fade'>
           <td class='uk-text-nowrap icons'>
             <a
               href
@@ -40,6 +40,7 @@ namespace ProcessWire;
           </td>
           <td class='uk-width-expand text'>
             <textarea class='uk-textarea' rows=1></textarea>
+            <div class='inline-editor uk-textarea'></div>
           </td>
           <td class='net'>
             <input type='number' class='uk-input' step='0.01' value=0>

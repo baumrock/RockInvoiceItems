@@ -1,4 +1,6 @@
 const RockInvoiceItems = (() => {
+  let textareaCount = 0;
+
   class RockInvoiceItems {
     init() {
       new Field();
@@ -190,6 +192,9 @@ const RockInvoiceItems = (() => {
       // store reference to this instance on the row dom element
       this.tr._item = this;
 
+      // add tinymce to textarea
+      this.addTinyMCE();
+
       // event listeners
       this.deleteButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -204,6 +209,51 @@ const RockInvoiceItems = (() => {
 
       // trigger first update
       this.update();
+    }
+
+    addTinyMCE() {
+      // add a unique id to the textarea and div
+      const id = "rockinvoiceitems-tinymce-" + ++textareaCount;
+      const divID = "rockinvoiceitems-inline-" + textareaCount;
+      const textarea = this.tr.querySelector(".text textarea");
+      textarea.id = id;
+      // Add input event listener to textarea
+      textarea.addEventListener("input", (e) => {
+        const editor = tinymce.get(divID);
+        if (editor) editor.setContent(e.target.value);
+      });
+      this.tr.querySelector(".text > div").id = divID;
+
+      // init tinymce on the el
+      // hide logo
+      tinymce.init({
+        selector: "#" + divID,
+        branding: false,
+        statusbar: false,
+        menubar: false,
+        inline: true,
+        toolbar: "bold italic bullist numlist",
+        toolbar_location: "top",
+        toolbar_sticky: true,
+
+        plugins: "lists autoresize",
+        height: "auto",
+        autoresize_bottom_margin: 0,
+
+        // Set initial content from textarea
+        setup: (editor) => {
+          editor.on("init", () => {
+            const textarea = document.getElementById(id);
+            editor.setContent(textarea.value);
+          });
+          // Update textarea instantly on any input
+          editor.on("input keyup change", () => {
+            const textarea = document.getElementById(id);
+            textarea.value = editor.getContent();
+            this.update();
+          });
+        },
+      });
     }
 
     clone() {
