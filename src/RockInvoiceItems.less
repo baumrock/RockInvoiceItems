@@ -1,7 +1,7 @@
 .InputfieldRockInvoiceItems {
   // hide textarea
-  textarea {
-    display: none;
+  .InputfieldContent > textarea {
+    // display: none;
   }
 
   .rockinvoice-items-table {
@@ -41,6 +41,12 @@
       text-align: right;
     }
 
+    // text
+    .text {
+      textarea {
+        transform: translateY(1px);
+      }
+    }
     // net column
     .net input {
       width: 120px;

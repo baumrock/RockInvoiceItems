@@ -173,7 +173,7 @@ const RockInvoiceItems = (() => {
       const data = JSON.parse(this.textarea.value);
       if (data.items) {
         data.items.forEach((item) => {
-          this.addRow().setData(item.net, item.vat, item.quantity);
+          this.addRow().setData(item.text, item.net, item.vat, item.quantity);
         });
       }
     }
@@ -231,6 +231,10 @@ const RockInvoiceItems = (() => {
           });
         });
       });
+      // same for textarea
+      this.tr.querySelector(".text textarea").addEventListener("input", () => {
+        this.update();
+      });
     }
 
     net() {
@@ -250,11 +254,17 @@ const RockInvoiceItems = (() => {
       });
     }
 
-    setData(net, vat, quantity) {
+    setData(text, net, vat, quantity) {
+      this.tr.querySelector(".text textarea").value = text;
       this.tr.querySelector(".net input").value = net;
       this.tr.querySelector(".vat input").value = vat;
       this.tr.querySelector(".quantity input").value = quantity;
       this.update();
+    }
+
+    text() {
+      console.log(this.tr.querySelector(".text textarea").value);
+      return this.tr.querySelector(".text textarea").value;
     }
 
     /**
@@ -262,7 +272,7 @@ const RockInvoiceItems = (() => {
      */
     toArray() {
       return {
-        text: "TBD",
+        text: this.text(),
         net: this.net(),
         vat: this.vat(),
         quantity: this.quantity(),

@@ -2,6 +2,9 @@
 
 namespace ProcessWire;
 
+/**
+ * GUI for InputfieldRockInvoiceItems
+ */
 ?>
 <div class='uk-overflow-auto'>
   <table class='uk-table uk-table-small uk-table-striped rockinvoice-items-table uk-margin-remove'>
@@ -36,7 +39,7 @@ namespace ProcessWire;
             </a>
           </td>
           <td class='uk-width-expand text'>
-            TBD
+            <textarea class='uk-textarea' rows=1></textarea>
           </td>
           <td class='net'>
             <input type='number' class='uk-input' step='0.01' value=0>
