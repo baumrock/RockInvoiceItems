@@ -16,7 +16,8 @@ class FieldtypeRockInvoiceItems extends FieldtypeTextarea
 
   public function formatValue($page, $field, $value)
   {
-    if (!$value instanceof Items) return;
+    // ensure $value is of type Items (not the raw json string)
+    if (!$value instanceof Items) $value = new Items($value);
     return wire()->files->render(__DIR__ . '/assets/invoiceitems-pdf.php', [
       'items' => $value
     ]);
