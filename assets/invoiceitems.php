@@ -24,7 +24,6 @@ namespace ProcessWire;
         <tr class='uk-animation-fade'>
           <td class='uk-text-nowrap icons'>
             <a
-              href
               class="sort-handle"
               title='<?= __('Move row') ?>'
               uk-tooltip>
