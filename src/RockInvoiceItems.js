@@ -313,7 +313,6 @@ const RockInvoiceItems = (() => {
     }
 
     text() {
-      console.log(this.tr.querySelector(".text textarea").value);
       return this.tr.querySelector(".text textarea").value;
     }
 
