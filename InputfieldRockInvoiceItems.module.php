@@ -36,5 +36,9 @@ class InputfieldRockInvoiceItems extends InputfieldTextarea
     }
     $this->addAsset('dst/RockInvoiceItems.min.js');
     $this->addAsset('dst/RockInvoiceItems.min.css');
+
+    // Get a properly initialized instance of InputfieldTinyMCE
+    $tiny = wire('modules')->get('InputfieldTinyMCE');
+    $tiny->renderReady($parent, $renderValueMode);
   }
 }
