@@ -31,6 +31,7 @@ class InputfieldRockInvoiceItems extends InputfieldTextarea
 
   public function renderReady(?Inputfield $parent = null, $renderValueMode = false)
   {
+    // load assets
     if (wire()->config->rockdevtools) {
       rockdevtools()->assets()->minify(__DIR__ . '/src', __DIR__ . '/dst');
     }
