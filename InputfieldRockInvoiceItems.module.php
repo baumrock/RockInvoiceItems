@@ -32,7 +32,7 @@ class InputfieldRockInvoiceItems extends InputfieldTextarea
   public function renderReady(?Inputfield $parent = null, $renderValueMode = false)
   {
     if (wire()->config->rockdevtools) {
-      rockdevtools()->minify(__DIR__ . '/src', __DIR__ . '/dst');
+      rockdevtools()->assets()->minify(__DIR__ . '/src', __DIR__ . '/dst');
     }
     $this->addAsset('dst/RockInvoiceItems.min.js');
     $this->addAsset('dst/RockInvoiceItems.min.css');
