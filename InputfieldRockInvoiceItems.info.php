@@ -3,11 +3,11 @@
 namespace ProcessWire;
 
 $info = [
-  'title' => 'RockInvoiceItems',
+  'title' => 'InputfieldRockInvoiceItems',
   'version' => json_decode(file_get_contents(__DIR__ . "/package.json"))->version,
-  'summary' => 'Invoiceitems Inputfield',
+  'summary' => 'Invoice items Inputfield',
   'icon' => 'list-ol',
   'requires' => [
-    'RockInvoice',
+    'FieldtypeRockInvoiceItems',
   ],
 ];

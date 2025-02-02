@@ -1,14 +1,29 @@
 .InputfieldRockInvoiceItems {
   // hide textarea
-  textarea {
+  .InputfieldContent > textarea {
     display: none;
   }
 
   .rockinvoice-items-table {
     // dragged row
     .ui-sortable-helper {
-      background-color: #ffffff;
-      opacity: 0.7;
+      background-color: rgba(0, 0, 0, 0.1);
+      // hide all columns while dragging to avoid display issues
+      td {
+        display: none;
+      }
+    }
+
+    // icons
+    .sort-handle {
+      width: 20px;
+      cursor: move;
+    }
+    .icons {
+      display: inline-flex;
+      gap: 15px;
+      align-items: center;
+      transform: translateY(7px);
     }
 
     // body cell padding
@@ -19,12 +34,15 @@
     // text column minimum witdth
     tbody .text {
       min-width: 400px;
+      textarea {
+        display: none;
+      }
     }
-
-    // icon size
-    .sort-handle {
-      width: 20px;
-      cursor: move;
+    .inline-editor {
+      transform: translateY(1px);
+      > * {
+        margin: 0;
+      }
     }
 
     // align all input fields right
@@ -32,6 +50,12 @@
       text-align: right;
     }
 
+    // text
+    .text {
+      textarea {
+        transform: translateY(1px);
+      }
+    }
     // net column
     .net input {
       width: 120px;
@@ -61,7 +85,7 @@
     .delete {
       a {
         display: inline-block;
-        transform: translateY(5px);
+        transform: translateY(7px);
       }
     }
 
@@ -81,6 +105,9 @@
     }
     tr {
       background: none;
+    }
+    .grandtotal {
+      font-size: 1.2em;
     }
   }
 }

@@ -1,0 +1,27 @@
+{
+    "file": "site\/modules\/RockInvoiceItems\/assets\/invoiceitems-pdf.php",
+    "textdomain": "site--modules--rockinvoiceitems--assets--invoiceitems-pdf-php",
+    "translations": {
+        "5012af45088eb8e999bb8350077b12ca": {
+            "text": "Netto"
+        },
+        "43183e955e3019bf7f8c942e016b7b13": {
+            "text": "UST"
+        },
+        "694e8d1f2ee056f98ee488bdc4982d73": {
+            "text": "Menge"
+        },
+        "96b0141273eabab320119c467cdcaf17": {
+            "text": "Gesamt"
+        },
+        "971ec2b041f0e1d0929c2193605bc7f5": {
+            "text": "Zwischensumme (ohne MwSt.)"
+        },
+        "3a2dfca00023fed5688fa09a077b4495": {
+            "text": "Gesamt (inkl. MwSt.)"
+        },
+        "7d74f3b92b19da5e606d737d339a9679": {
+            "text": "Artikel"
+        }
+    }
+}
