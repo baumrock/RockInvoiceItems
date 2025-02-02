@@ -15,6 +15,7 @@ A ProcessWire module that provides a powerful and flexible invoice item manageme
 - Clean and intuitive user interface
 - Automatic data persistence
 - Responsive design that works well on all screen sizes (using overflow scroll)
+- Fully translatable (German Translations included via RockLanguage)
 
 ## Installation
 
