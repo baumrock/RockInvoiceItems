@@ -1,4 +1,15 @@
-## 1.1.0 (2025-02-02)
+## [2.0.0](https://github.com/baumrock/RockInvoiceItems/compare/v1.1.0...v2.0.0) (2026-01-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* change license to MIT
+
+### Bug Fixes
+
+* change license to MIT ([7d0ec7d](https://github.com/baumrock/RockInvoiceItems/commit/7d0ec7d8d4526f518d91232bda49f41e9746dc0f))
+
+## [1.1.0](https://github.com/baumrock/RockInvoiceItems/compare/c2a7749d6a686825ba0a01e70076571c31f65c45...v1.1.0) (2025-02-02)
 
 
 ### Features
