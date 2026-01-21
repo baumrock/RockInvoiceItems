@@ -6,7 +6,7 @@ use RockInvoiceItems\Items;
 
 /**
  * @author Bernhard Baumrock, 14.01.2025
- * @license COMMERCIAL DO NOT DISTRIBUTE
+ * @license MIT as of 2026-01-21
  * @link https://www.baumrock.com
  */
 require_once __DIR__ . '/Item.php';
